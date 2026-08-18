@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuel J. Lorenzo &amp; Asoc. S.R.L. | Administración de Consorcios · Mar del Plata</title>
+<meta name="description" content="Administración de consorcios en Mar del Plata desde 1960. Liquidación de expensas, rendición de cuentas, gestión de reparaciones y trámites legales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800;900&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #eef1f8;
+    --paper-2: #e2e7f3;
+    --panel: #ffffff;
+    --ink: #1a1a49;
+    --ink-soft: #3d3f6b;
+    --muted: #63668f;
+    --line: #ccd2e6;
+    --line-on-navy: rgba(255,255,255,0.16);
+    --navy: #1a1a49;
+    --navy-2: #22224f;
+    --navy-3: #2a2a5c;
+    --blue: #2154ac;
+    --cyan: #27aae1;
+    --cyan-light: #7dd6f5;
+    --yellow: #ffd400;
+    --red: #ed1c24;
+    --white: #ffffff;
+    --on-navy: #f4f6fc;
+    --on-navy-muted: #aab0d6;
+    --radius: 6px;
+    --maxw: 1180px;
+    --font-display: 'Libre Franklin', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink-soft);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+
+  h1,h2,h3,h4{font-family:var(--font-display); font-weight:800; line-height:1.18; letter-spacing:-0.01em; color:var(--navy);}
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    display:flex; align-items:center; gap:10px;
+    font-weight:600;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--blue);
+    display:inline-block;
+  }
+  .on-navy .eyebrow{color:var(--cyan-light);}
+  .on-navy .eyebrow::before{background:var(--cyan-light);}
+
+  :focus-visible{outline:2px solid var(--blue); outline-offset:3px;}
+
+  mark{
+    background:none;
+    color:var(--navy);
+    position:relative;
+    font-weight:800;
+  }
+  mark::after{
+    content:"";
+    position:absolute; left:-2px; right:-2px; bottom:2px; height:9px;
+    background:var(--yellow); opacity:0.55; z-index:-1;
+  }
+  .on-navy mark{color:#fff;}
+  .on-navy mark::after{background:var(--cyan); opacity:0.55;}
+
+  /* ---------- Botones ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding:13px 28px;
+    border-radius:var(--radius);
+    font-weight:600;
+    font-size:15px;
+    font-family:var(--font-body);
+    border:1.5px solid var(--navy);
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .btn-primary{
+    background:var(--navy);
+    color:#fff;
+  }
+  .btn-primary:hover{background:var(--blue); border-color:var(--blue);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--navy);
+  }
+  .btn-ghost:hover{background:rgba(25,25,71,0.05); border-color:var(--ink);}
+
+  .on-navy .btn-primary{background:var(--cyan); border-color:var(--cyan); color:#0a1c26;}
+  .on-navy .btn-primary:hover{background:var(--cyan-light); border-color:var(--cyan-light);}
+  .on-navy .btn-ghost{border-color:rgba(255,255,255,0.4); color:#fff;}
+  .on-navy .btn-ghost:hover{background:rgba(255,255,255,0.08); border-color:#fff;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:13px;}
+  .brand img{height:42px; width:auto;}
+  .brand-text{font-family:var(--font-display); font-weight:800; font-size:15.5px; line-height:1.25; color:var(--navy);}
+  .brand-text span{display:block; font-family:var(--font-mono); font-weight:500; font-size:10px; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase; margin-top:3px;}
+
+  .nav-links{display:flex; align-items:center; gap:36px;}
+  .nav-links a{
+    font-size:14.5px; font-weight:600; color:var(--ink-soft);
+    position:relative; padding:4px 0;
+    transition:color .2s ease;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-3px; height:2px; width:0;
+    background:var(--blue); transition:width .25s ease;
+  }
+  .nav-links a:hover{color:var(--navy);}
+  .nav-links a:hover::after{width:100%;}
+
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--navy); font-size:26px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:170px 0 0;
+    background:var(--navy);
+  }
+  .hero h1{color:#fff;}
+  .hero-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 28px 80px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero-copy h1{
+    font-size:clamp(32px, 4.2vw, 50px);
+    margin:22px 0 24px;
+  }
+  .hero-copy p{
+    font-size:17px; color:var(--on-navy-muted); max-width:520px; margin-bottom:34px;
+  }
+  .hero-actions{display:flex; gap:16px; flex-wrap:wrap;}
+
+  .hero-visual{position:relative; height:380px; display:flex; flex-direction:column; justify-content:flex-end; gap:18px;}
+  .skyline-hero{width:100%; height:330px;}
+
+  .credential-chip{
+    align-self:flex-start;
+    background:var(--navy-3);
+    border:1px solid var(--line-on-navy);
+    border-radius:var(--radius);
+    padding:16px 22px;
+    font-family:var(--font-mono); font-size:11.5px; color:var(--on-navy-muted);
+    display:flex; gap:24px;
+  }
+  .credential-chip b{color:#fff; font-weight:800; display:block; font-family:var(--font-display); font-size:20px; margin-bottom:2px;}
+
+  /* ---------- Ruler divider (signature element) ---------- */
+  .ruler-divider{width:100%; height:34px; display:block; background:var(--navy);}
+  .ruler-divider line{stroke:rgba(255,255,255,0.5); stroke-width:1;}
+  .ruler-divider .base{stroke-width:1.2;}
+
+  /* ---------- Stats bar ---------- */
+  .stats{
+    background:var(--paper-2);
+    border-bottom:1px solid var(--line);
+  }
+  .stats-inner{
+    max-width:var(--maxw); margin:0 auto; padding:34px 28px;
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .stat{
+    padding:0 24px;
+    border-left:1px solid var(--line);
+  }
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat b{
+    font-family:var(--font-display); font-size:clamp(24px,2.8vw,30px); font-weight:800;
+    color:var(--navy); display:block;
+  }
+  .stat span{font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);}
+
+  /* ---------- Section heading ---------- */
+  .section{padding:104px 0;}
+  .section-head{max-width:640px; margin-bottom:54px;}
+  .section-head h2{font-size:clamp(27px,3.2vw,37px); margin-top:16px;}
+  .section-head p{color:var(--ink-soft); margin-top:16px; font-size:16px;}
+
+  /* ---------- Servicios ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .service-card{
+    background:var(--panel);
+    padding:32px 28px;
+    transition:background .2s ease;
+  }
+  .service-card:hover{background:var(--paper-2);}
+  .service-icon{
+    width:48px; height:48px; border-radius:50%;
+    border:1.5px solid var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .service-icon svg{width:22px; height:22px; stroke:var(--navy); fill:none; stroke-width:1.8;}
+  .service-card h3{font-size:16.5px; margin-bottom:10px; font-weight:700;}
+  .service-card p{font-size:14.5px; color:var(--muted); line-height:1.6;}
+
+  .badges-row{
+    margin-top:0; padding-top:0;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-top:none;
+  }
+  .badge-item{display:flex; align-items:center; gap:14px; background:var(--paper-2); padding:22px 26px;}
+  .badge-icon{
+    width:40px; height:40px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid var(--blue);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .badge-icon svg{width:18px; height:18px; stroke:var(--blue); fill:none; stroke-width:1.8;}
+  .badge-item h4{font-size:14px; color:var(--navy); font-weight:700;}
+  .badge-item span{font-size:12.5px; color:var(--muted); font-family:var(--font-mono);}
+
+  /* ---------- Nosotros ---------- */
+  .about{background:var(--navy);}
+  .about-inner{
+    max-width:var(--maxw); margin:0 auto; padding:104px 28px;
+    display:grid; grid-template-columns:0.95fr 1.05fr; gap:60px; align-items:center;
+  }
+  .about-copy h2{color:#fff;}
+  .about-copy p{color:var(--on-navy-muted); font-size:16px; margin-bottom:18px;}
+  .about-copy p:last-of-type{margin-bottom:0;}
+  .about-copy strong{color:#fff; font-weight:700;}
+
+  .credential-box{
+    margin-top:30px;
+    display:inline-flex; align-items:center; gap:14px;
+    background:var(--navy-3);
+    border:1px solid var(--line-on-navy);
+    border-left:3px solid var(--red);
+    border-radius:2px; padding:15px 20px;
+  }
+  .credential-box span{font-family:var(--font-mono); font-size:12px; color:var(--on-navy-muted);}
+  .credential-box b{color:#fff;}
+
+  .about-panel{
+    background:var(--navy-3);
+    border:1px solid var(--line-on-navy);
+    border-radius:var(--radius);
+    padding:40px;
+  }
+  .timeline-fact{
+    display:flex; gap:20px; padding:20px 0;
+    border-bottom:1px solid var(--line-on-navy);
+  }
+  .timeline-fact:last-child{border-bottom:none; padding-bottom:0;}
+  .timeline-fact:first-child{padding-top:0;}
+  .timeline-fact .yr{
+    font-family:var(--font-mono); font-weight:700; color:var(--yellow); font-size:13px;
+    width:64px; flex-shrink:0; padding-top:2px;
+  }
+  .timeline-fact h4{font-size:15px; color:#fff; margin-bottom:5px; font-weight:700;}
+  .timeline-fact p{font-size:13.5px; color:var(--on-navy-muted);}
+
+  /* ---------- Contacto ---------- */
+  .contact-inner{
+    max-width:var(--maxw); margin:0 auto; padding:104px 28px;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px;
+  }
+  .contact-info h2{font-size:clamp(26px,3vw,33px); margin:16px 0 18px;}
+  .contact-info > p{color:var(--ink-soft); margin-bottom:32px; font-size:15.5px;}
+  .contact-list{display:flex; flex-direction:column; gap:22px;}
+  .contact-list li{display:flex; gap:16px; align-items:flex-start;}
+  .contact-list .ic{
+    width:40px; height:40px; border-radius:50%; flex-shrink:0;
+    border:1.5px solid var(--navy);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .contact-list .ic svg{width:18px; height:18px; stroke:var(--navy); fill:none; stroke-width:1.8;}
+  .contact-list .label{font-size:11px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); margin-bottom:3px;}
+  .contact-list .value{font-size:15.5px; color:var(--navy); font-weight:600;}
+  .contact-list a.value:hover{color:var(--blue);}
+
+  .map-link{
+    margin-top:32px; display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; color:var(--navy); font-weight:700;
+    border-bottom:1px solid var(--blue); padding-bottom:2px;
+  }
+
+  .form-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:38px;
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .field{margin-bottom:20px;}
+  .field label{
+    display:block; font-size:11.5px; font-family:var(--font-mono);
+    text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:8px;
+    font-weight:600;
+  }
+  .field input, .field textarea{
+    width:100%; background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px; padding:12px 14px;
+    color:var(--navy); font-family:var(--font-body); font-size:14.5px;
+    transition:border-color .2s ease;
+  }
+  .field input::placeholder, .field textarea::placeholder{color:var(--muted);}
+  .field input:focus, .field textarea:focus{
+    outline:none; border-color:var(--navy);
+  }
+  .field textarea{resize:vertical; min-height:110px;}
+  .form-foot{display:flex; align-items:center; gap:18px; margin-top:6px;}
+  .form-note{font-size:12.5px; color:var(--muted);}
+  .form-status{font-size:13.5px; margin-top:14px; display:none;}
+  .form-status.ok{color:var(--blue); display:block;}
+  .form-status.err{color:var(--red); display:block;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--paper); border-top:1px solid var(--line); padding:44px 0 26px;}
+  .footer-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;
+  }
+  .footer-brand{display:flex; align-items:center; gap:12px;}
+  .footer-brand img{height:32px;}
+  .footer-brand div{font-family:var(--font-display); font-weight:800; font-size:14px; color:var(--navy);}
+  .footer-brand span{display:block; font-family:var(--font-mono); font-size:10px; color:var(--muted); margin-top:3px; text-transform:uppercase; letter-spacing:0.06em;}
+  .footer-meta{font-family:var(--font-mono); font-size:12px; color:var(--muted); text-align:right; line-height:1.8;}
+
+  /* ---------- Reveal animation (sutil) ---------- */
+  .reveal{opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px){
+    .hero-inner{grid-template-columns:1fr; padding-bottom:56px;}
+    .hero-visual{height:260px; order:-1;}
+    .about-inner, .contact-inner{grid-template-columns:1fr;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .badges-row{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:repeat(2,1fr); gap:20px 0;}
+    .stat:nth-child(3){border-left:none;}
+  }
+  @media (max-width: 720px){
+    .nav-links{
+      position:fixed; top:74px; left:0; right:0; bottom:0;
+      background:var(--paper); flex-direction:column; align-items:flex-start;
+      padding:30px 28px; gap:24px; transform:translateX(100%);
+      transition:transform .3s ease; z-index:90;
+      border-top:1px solid var(--line);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-toggle{display:block;}
+    .nav-cta .btn-ghost{display:none;}
+    .services-grid{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .section{padding:76px 0;}
+    .hero{padding-top:132px;}
+    .footer-inner{flex-direction:column;}
+    .footer-meta{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <img src="assets/logo-dark.png" alt="Manuel J. Lorenzo & Asoc. S.R.L." id="headerLogo">
+      <span class="brand-text">Manuel J. Lorenzo &amp; Asoc.<span>Administración de Consorcios</span></span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contacto" class="btn btn-ghost" style="padding:9px 20px; font-size:14px;">Contactar</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero on-navy">
+    <div class="hero-inner">
+      <div class="hero-copy reveal">
+        <div class="eyebrow" data-field="hero.eyebrow">ADM. DE CONSORCIOS · MAT. RPAC N.º 2028 · MAR DEL PLATA</div>
+        <h1 data-field="hero.title"><span data-part="before">Sesenta y cinco años administrando la </span><mark data-part="highlight">confianza</mark><span data-part="after"> de sus vecinos.</span></h1>
+        <p data-field="hero.subtitle">Desde 1960 acompañamos a los consorcios de Mar del Plata con transparencia en cada rendición de cuentas y respuestas rápidas ante cada reclamo.</p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary" data-field="hero.cta_primary">Solicitar información</a>
+          <a href="#servicios" class="btn btn-ghost" data-field="hero.cta_secondary">Ver servicios</a>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <svg class="skyline-hero" viewBox="0 0 520 400" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg">
+          <!-- estilo plano de arquitectura, líneas claras sobre navy -->
+          <g fill="none" stroke="#4a4d80" stroke-width="2">
+            <rect x="40" y="200" width="70" height="190"/>
+            <rect x="120" y="160" width="55" height="230"/>
+            <rect x="360" y="180" width="60" height="210"/>
+            <rect x="430" y="220" width="50" height="170"/>
+          </g>
+          <!-- torre principal -->
+          <g>
+            <rect x="215" y="50" width="70" height="340" fill="#27aae1"/>
+            <g stroke="#0a3a52" stroke-width="2">
+              <line x1="233" y1="70" x2="233" y2="380"/>
+              <line x1="251" y1="70" x2="251" y2="380"/>
+              <line x1="269" y1="70" x2="269" y2="380"/>
+            </g>
+          </g>
+          <!-- torre derecha (facetada, contorno) -->
+          <g fill="none" stroke="#7dd6f5" stroke-width="2">
+            <polygon points="290,170 340,140 340,390 290,390"/>
+          </g>
+          <g stroke="#7dd6f5" stroke-width="1.3" opacity="0.55">
+            <line x1="300" y1="188" x2="333" y2="172"/>
+            <line x1="300" y1="210" x2="333" y2="194"/>
+            <line x1="300" y1="232" x2="333" y2="216"/>
+            <line x1="300" y1="254" x2="333" y2="238"/>
+            <line x1="300" y1="276" x2="333" y2="260"/>
+            <line x1="300" y1="298" x2="333" y2="282"/>
+            <line x1="300" y1="320" x2="333" y2="304"/>
+            <line x1="300" y1="342" x2="333" y2="326"/>
+            <line x1="300" y1="364" x2="333" y2="348"/>
+          </g>
+          <!-- torre izquierda con ventanas -->
+          <rect x="150" y="250" width="70" height="140" fill="#f4f6fc" stroke="#f4f6fc" stroke-width="2"/>
+          <g fill="#1a1a49">
+            <rect x="160" y="264" width="9" height="9"/><rect x="177" y="264" width="9" height="9"/><rect x="194" y="264" width="9" height="9"/>
+            <rect x="160" y="283" width="9" height="9"/><rect x="177" y="283" width="9" height="9"/><rect x="194" y="283" width="9" height="9"/>
+            <rect x="160" y="302" width="9" height="9"/><rect x="177" y="302" width="9" height="9"/><rect x="194" y="302" width="9" height="9"/>
+            <rect x="160" y="321" width="9" height="9"/><rect x="177" y="321" width="9" height="9"/><rect x="194" y="321" width="9" height="9"/>
+            <rect x="160" y="340" width="9" height="9"/><rect x="177" y="340" width="9" height="9"/><rect x="194" y="340" width="9" height="9"/>
+            <rect x="160" y="359" width="9" height="9"/><rect x="177" y="359" width="9" height="9"/><rect x="194" y="359" width="9" height="9"/>
+          </g>
+          <!-- línea de base -->
+          <line x1="0" y1="390" x2="520" y2="390" stroke="#4a4d80" stroke-width="1.5"/>
+          <!-- marcas tipo plano / cota -->
+          <g stroke="#ffd400" stroke-width="1">
+            <line x1="0" y1="398" x2="0" y2="404"/>
+            <line x1="130" y1="398" x2="130" y2="404"/>
+            <line x1="260" y1="398" x2="260" y2="404"/>
+            <line x1="390" y1="398" x2="390" y2="404"/>
+            <line x1="520" y1="398" x2="520" y2="404"/>
+          </g>
+        </svg>
+        <div class="credential-chip">
+          <div><b data-field="hero.chip_1_value">1960</b><span data-field="hero.chip_1_label">Año de fundación</span></div>
+          <div><b data-field="hero.chip_2_value">13</b><span data-field="hero.chip_2_label">Edificios</span></div>
+          <div><b data-field="hero.chip_3_value">+1000</b><span data-field="hero.chip_3_label">Unidades func.</span></div>
+        </div>
+      </div>
+    </div>
+    <svg class="ruler-divider" viewBox="0 0 1200 34" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line class="base" x1="0" y1="17" x2="1200" y2="17"/>
+      <g>
+        <!-- marcas cortas cada 20, largas cada 100 -->
+      </g>
+      <g id="ticks"></g>
+      <script>
+        // placeholder, ticks generated inline below
+      </script>
+    </svg>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-inner">
+      <div class="stat reveal" data-repeat="stats" data-index="0"><b data-field="stats.0.value">65+</b><span data-field="stats.0.label">Años de trayectoria</span></div>
+      <div class="stat reveal" data-repeat="stats" data-index="1"><b data-field="stats.1.value">13</b><span data-field="stats.1.label">Edificios administrados</span></div>
+      <div class="stat reveal" data-repeat="stats" data-index="2"><b data-field="stats.2.value">+1000</b><span data-field="stats.2.label">Unidades funcionales</span></div>
+      <div class="stat reveal" data-repeat="stats" data-index="3"><b data-field="stats.3.value">RPAC 2028</b><span data-field="stats.3.label">Matrícula habilitante</span></div>
+    </div>
+  </div>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Servicios</div>
+        <h2 data-field="services_heading">Todo lo que un consorcio necesita, en un mismo lugar</h2>
+        <p data-field="services_intro">Gestionamos cada aspecto administrativo, legal y edilicio del consorcio para que el consejo de propietarios pueda tomar decisiones con información clara.</p>
+      </div>
+
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M15 3v4h4"/><path d="M9 13h6M9 16h6M9 10h2"/></svg></div>
+          <h3 data-field="services.0.title">Liquidación de Expensas</h3>
+          <p data-field="services.0.description">Cálculo y liquidación mensual clara, a tiempo y sin sorpresas, discriminada por unidad funcional.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 6h7v7"/></svg></div>
+          <h3 data-field="services.1.title">Rendición de Cuentas</h3>
+          <p data-field="services.1.description">Balances detallados y accesibles para que cada propietario sepa en qué se invierte su expensa.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.1-3.1a4 4 0 01-5.4 5.4L5.7 21.3a1 1 0 01-1.4-1.4L14.1 10a4 4 0 015.4-5.4l-3 3z"/></svg></div>
+          <h3 data-field="services.2.title">Gestión de Reparaciones</h3>
+          <p data-field="services.2.description">Coordinación de proveedores y seguimiento de obras y arreglos edilicios, de principio a fin.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3L21 21"/><path d="M8 10.5h5"/></svg></div>
+          <h3 data-field="services.3.title">Gestión de Deudores</h3>
+          <p data-field="services.3.description">Seguimiento y gestión de la morosidad, cuidando siempre la relación con cada propietario.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l7-4 7 4M5 7v3a1 1 0 001 1h1M19 7v3a1 1 0 01-1 1h-1M4 21h16"/></svg></div>
+          <h3 data-field="services.4.title">Trámites Legales</h3>
+          <p data-field="services.4.description">Representación y gestión de trámites ante organismos, aseguradoras y la justicia cuando es necesario.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 21v-2a5 5 0 015-5h0a5 5 0 015 5v2"/><circle cx="19" cy="9" r="2"/><path d="M17 21v-1a3.5 3.5 0 013-3.46"/></svg></div>
+          <h3 data-field="services.5.title">Administración de Personal</h3>
+          <p data-field="services.5.description">Gestión de encargados y personal de edificio: liquidación de sueldos y cargas sociales.</p>
+        </div>
+      </div>
+
+      <div class="badges-row reveal">
+        <div class="badge-item">
+          <div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.5L12 16l-5.9 3.5L7.6 13l-5-4.4 6.6-.6L12 2z"/></svg></div>
+          <div><h4 data-field="badges.0.title">Atención Personalizada</h4><span data-field="badges.0.description">Trato directo con cada consorcio</span></div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <div><h4 data-field="badges.1.title">Respuesta Rápida</h4><span data-field="badges.1.description">Ante reclamos y urgencias</span></div>
+        </div>
+        <div class="badge-item">
+          <div class="badge-icon"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/></svg></div>
+          <div><h4 data-field="badges.2.title">Trayectoria Comercial</h4><span data-field="badges.2.description">Más de seis décadas de historia</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="about on-navy">
+    <div class="about-inner">
+      <div class="about-copy reveal">
+        <div class="eyebrow">Nosotros</div>
+        <h2 style="font-size:clamp(26px,3vw,33px); margin:16px 0 22px;" data-field="about.heading">Una administración de familia, desde 1960</h2>
+        <p data-field="about.paragraph_1"><strong>Manuel José Lorenzo &amp; Asoc. S.R.L.</strong> es una empresa marplatense dedicada a la administración de consorcios desde 1960. En más de seis décadas de trayectoria ininterrumpida nos consolidamos como un referente de confianza y solidez, sobre tres pilares: la transparencia institucional, la valorización del patrimonio edilicio y la convivencia armónica entre copropietarios.</p>
+        <p data-field="about.paragraph_2">Combinamos la experiencia de una trayectoria tradicional con herramientas modernas de gestión, para ofrecer respuestas ágiles y soluciones eficientes a las exigencias actuales de cada comunidad.</p>
+        <div class="credential-box">
+          <span data-field="about.credential">Matrícula habilitante RPAC N.º 2028 — Mar del Plata</span>
+        </div>
+      </div>
+      <div class="about-panel reveal">
+        <div class="timeline-fact">
+          <div class="yr" data-field="about.timeline.0.year">1960</div>
+          <div><h4 data-field="about.timeline.0.title">Fundación de la administración</h4><p data-field="about.timeline.0.description">Inicio de la actividad en Mar del Plata, con sede en Santa Fe 2522.</p></div>
+        </div>
+        <div class="timeline-fact">
+          <div class="yr" data-field="about.timeline.1.year">Hoy</div>
+          <div><h4 data-field="about.timeline.1.title">13 edificios, +1000 unidades</h4><p data-field="about.timeline.1.description">Consorcios de distintos barrios de la ciudad confían su administración diaria.</p></div>
+        </div>
+        <div class="timeline-fact">
+          <div class="yr" data-field="about.timeline.2.year">Cada mes</div>
+          <div><h4 data-field="about.timeline.2.title">Rendición de cuentas clara</h4><p data-field="about.timeline.2.description">Liquidaciones puntuales y balances accesibles para todo el consorcio.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section" style="padding-top:0;">
+    <div class="contact-inner">
+      <div class="contact-info reveal">
+        <div class="eyebrow">Contacto</div>
+        <h2 data-field="contact.heading">Hablemos de su consorcio</h2>
+        <p data-field="contact.intro">Cuéntenos sobre su edificio y nos pondremos en contacto a la brevedad para conversar sobre la administración.</p>
+        <ul class="contact-list">
+          <li>
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+            <div><div class="label">Dirección</div><div class="value" data-field="contact.address">Santa Fe 2522, Mar del Plata</div></div>
+          </li>
+          <li>
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z"/></svg></div>
+            <div><div class="label">Teléfono</div><a class="value" href="tel:+542234925309" id="phoneLink" data-field="contact.phone_display">223 492-5309</a></div>
+          </li>
+          <li>
+            <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></div>
+            <div><div class="label">Email</div><a class="value" href="mailto:admlorenzo@gmail.com" id="emailLink" data-field="contact.email">admlorenzo@gmail.com</a></div>
+          </li>
+        </ul>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Santa+Fe+2522+Mar+del+Plata" target="_blank" rel="noopener">Ver en Google Maps →</a>
+      </div>
+
+      <form class="form-card reveal" id="contactForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="nombre">Nombre y apellido</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Su nombre" required>
+          </div>
+          <div class="field">
+            <label for="consorcio">Consorcio / Edificio</label>
+            <input type="text" id="consorcio" name="consorcio" placeholder="Ej: Edificio Costanera">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="su@email.com" required>
+          </div>
+          <div class="field">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="223 000-0000">
+          </div>
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntenos brevemente qué necesita su consorcio" required></textarea>
+        </div>
+        <div class="form-foot">
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          <span class="form-note">Respondemos a la brevedad por email o teléfono.</span>
+        </div>
+        <div class="form-status" id="formStatus"></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/logo-dark.png" alt="Manuel J. Lorenzo & Asoc." id="footerLogo">
+      <div>Manuel J. Lorenzo &amp; Asoc. S.R.L.<span>Administración de Consorcios · Desde 1960</span></div>
+    </div>
+    <div class="footer-meta">
+      <span data-field="footer.line1">Santa Fe 2522, Mar del Plata · Tel. 223 492-5309</span><br>
+      <span data-field="footer.line2">admlorenzo@gmail.com · Mat. RPAC N.º 2028</span><br>
+      © <span id="year"></span> Manuel J. Lorenzo &amp; Asoc. S.R.L.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Año dinámico
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---------------------------------------------------------------
+  // CARGA DE CONTENIDO EDITABLE (content.json)
+  // Este bloque lee content.json y actualiza todos los textos e
+  // imágenes marcados con data-field. Si el archivo editado desde
+  // el panel /admin tiene algún dato faltante, la página conserva
+  // el texto que ya está escrito acá abajo como respaldo.
+  // ---------------------------------------------------------------
+  function getPath(obj, path) {
+    return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
+  }
+
+  function hydrateContent(data) {
+    // Logo (header y footer)
+    if (data.logo) {
+      const headerLogo = document.getElementById('headerLogo');
+      const footerLogo = document.getElementById('footerLogo');
+      if (headerLogo) headerLogo.src = data.logo;
+      if (footerLogo) footerLogo.src = data.logo;
+    }
+
+    // Título del hero (antes / resaltado / después)
+    const h1 = document.querySelector('[data-field="hero.title"]');
+    if (h1 && data.hero) {
+      const before = h1.querySelector('[data-part="before"]');
+      const highlight = h1.querySelector('[data-part="highlight"]');
+      const after = h1.querySelector('[data-part="after"]');
+      if (before && data.hero.title_before != null) before.textContent = data.hero.title_before;
+      if (highlight && data.hero.title_highlight != null) highlight.textContent = data.hero.title_highlight;
+      if (after && data.hero.title_after != null) after.textContent = data.hero.title_after;
+    }
+
+    // Teléfono y email (actualiza también los links tel:/mailto:)
+    if (data.contact) {
+      const phoneEl = document.getElementById('phoneLink');
+      if (phoneEl && data.contact.phone_display) {
+        phoneEl.textContent = data.contact.phone_display;
+        if (data.contact.phone_link) phoneEl.href = 'tel:' + data.contact.phone_link;
+      }
+      const emailEl = document.getElementById('emailLink');
+      if (emailEl && data.contact.email) {
+        emailEl.textContent = data.contact.email;
+        emailEl.href = 'mailto:' + data.contact.email;
+      }
+    }
+
+    // Resto de los campos simples: [data-field="a.b.c"] o [data-field="lista.0.campo"]
+    document.querySelectorAll('[data-field]').forEach(el => {
+      const path = el.getAttribute('data-field');
+      // Los que ya manejamos arriba con lógica especial, los saltamos
+      if (path === 'hero.title' || path === 'contact.phone_display' || path === 'contact.email') return;
+      const value = getPath(data, path);
+      if (value != null && value !== '') el.textContent = value;
+    });
+  }
+
+  fetch('content.json?v=' + Date.now())
+    .then(r => r.ok ? r.json() : null)
+    .then(data => { if (data) hydrateContent(data); })
+    .catch(() => { /* si falla, la página se queda con los textos por defecto */ });
+
+  // Generar marcas de regla en el divisor (signature element)
+  document.querySelectorAll('.ruler-divider').forEach(svg => {
+    const ns = "http://www.w3.org/2000/svg";
+    for(let x=0; x<=1200; x+=20){
+      const isLong = x % 100 === 0;
+      const line = document.createElementNS(ns, 'line');
+      line.setAttribute('x1', x); line.setAttribute('x2', x);
+      line.setAttribute('y1', 17); line.setAttribute('y2', isLong ? 30 : 23);
+      line.setAttribute('stroke', isLong ? '#ffd400' : 'rgba(255,255,255,0.35)');
+      line.setAttribute('stroke-width', isLong ? 1.4 : 1);
+      svg.appendChild(line);
+    }
+  });
+
+  // Menú mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? '✕' : '☰';
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.textContent = '☰';
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Reveal on scroll (sutil)
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+    // Red de seguridad: si por algún motivo no se dispara, mostrar igual a los 2s
+    setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2000);
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
+  // Formulario de contacto
+  // Formulario conectado a Formspree: los envíos llegan directo por email.
+  // Si en el futuro querés cambiar de servicio (por ej. a un webhook de Make),
+  // simplemente reemplazá el valor de ENDPOINT_URL de abajo por la nueva URL.
+  const ENDPOINT_URL = "https://formspree.io/f/mrpzygrw";
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    if (ENDPOINT_URL) {
+      try {
+        const res = await fetch(ENDPOINT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (res.ok) {
+          status.textContent = 'Mensaje enviado. Nos pondremos en contacto a la brevedad.';
+          status.className = 'form-status ok';
+          form.reset();
+        } else {
+          throw new Error('Error de envío');
+        }
+      } catch (err) {
+        // Si falla el envío automático (cupo agotado, caída del servicio, etc.),
+        // abrimos el cliente de mail con los datos ya precargados como respaldo.
+        const subject = encodeURIComponent(`Consulta de ${data.nombre}${data.consorcio ? ' — ' + data.consorcio : ''}`);
+        const body = encodeURIComponent(
+          `Nombre: ${data.nombre}\nConsorcio/Edificio: ${data.consorcio || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono || '-'}\n\nMensaje:\n${data.mensaje}`
+        );
+        window.location.href = `mailto:admlorenzo@gmail.com?subject=${subject}&body=${body}`;
+        status.textContent = 'No pudimos enviarlo automáticamente, así que abrimos su cliente de correo con el mensaje precargado. Por favor, revíselo y envíelo desde ahí.';
+        status.className = 'form-status err';
+      }
+    } else {
+      const subject = encodeURIComponent(`Consulta de ${data.nombre}${data.consorcio ? ' — ' + data.consorcio : ''}`);
+      const body = encodeURIComponent(
+        `Nombre: ${data.nombre}\nConsorcio/Edificio: ${data.consorcio || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono || '-'}\n\nMensaje:\n${data.mensaje}`
+      );
+      window.location.href = `mailto:admlorenzo@gmail.com?subject=${subject}&body=${body}`;
+      status.textContent = 'Se abrió su cliente de correo con el mensaje precargado.';
+      status.className = 'form-status ok';
+    }
+  });
+</script>
+
+</body>
+</html>
