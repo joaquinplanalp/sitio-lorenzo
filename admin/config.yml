@@ -1,1 +1,94 @@
+backend:
+  name: git-gateway
+  branch: main
 
+# Panel en español
+locale: "es"
+
+media_folder: "assets"
+public_folder: "assets"
+
+collections:
+  - name: "sitio"
+    label: "Sitio web"
+    files:
+      - file: "content.json"
+        label: "Contenido del sitio"
+        name: "contenido"
+        fields:
+          - { label: "Logo (header y footer)", name: "logo", widget: "image" }
+
+          - label: "Inicio"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Texto pequeño arriba del título", name: "eyebrow", widget: "string" }
+              - { label: "Título — parte 1 (antes de la palabra destacada)", name: "title_before", widget: "string" }
+              - { label: "Título — palabra destacada", name: "title_highlight", widget: "string" }
+              - { label: "Título — parte 2 (después)", name: "title_after", widget: "string" }
+              - { label: "Bajada / descripción", name: "subtitle", widget: "text" }
+              - { label: "Botón principal", name: "cta_primary", widget: "string" }
+              - { label: "Botón secundario", name: "cta_secondary", widget: "string" }
+              - { label: "Dato 1 — valor (ej: 1960)", name: "chip_1_value", widget: "string" }
+              - { label: "Dato 1 — descripción", name: "chip_1_label", widget: "string" }
+              - { label: "Dato 2 — valor (ej: 13)", name: "chip_2_value", widget: "string" }
+              - { label: "Dato 2 — descripción", name: "chip_2_label", widget: "string" }
+              - { label: "Dato 3 — valor (ej: +1000)", name: "chip_3_value", widget: "string" }
+              - { label: "Dato 3 — descripción", name: "chip_3_label", widget: "string" }
+
+          - label: "Barra de estadísticas (4 datos)"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Valor", name: "value", widget: "string" }
+              - { label: "Descripción", name: "label", widget: "string" }
+
+          - { label: "Servicios — título de la sección", name: "services_heading", widget: "string" }
+          - { label: "Servicios — bajada de la sección", name: "services_intro", widget: "text" }
+          - label: "Servicios (las 6 tarjetas)"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descripción", name: "description", widget: "text" }
+
+          - label: "Sellos de confianza (los 3 chicos)"
+            name: "badges"
+            widget: "list"
+            fields:
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Descripción", name: "description", widget: "string" }
+
+          - label: "Nosotros"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Título de la sección", name: "heading", widget: "string" }
+              - { label: "Primer párrafo", name: "paragraph_1", widget: "text" }
+              - { label: "Segundo párrafo", name: "paragraph_2", widget: "text" }
+              - { label: "Texto de la matrícula", name: "credential", widget: "string" }
+              - label: "Línea de tiempo (los 3 datos de la derecha)"
+                name: "timeline"
+                widget: "list"
+                fields:
+                  - { label: "Año / momento", name: "year", widget: "string" }
+                  - { label: "Título", name: "title", widget: "string" }
+                  - { label: "Descripción", name: "description", widget: "text" }
+
+          - label: "Contacto"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Título de la sección", name: "heading", widget: "string" }
+              - { label: "Texto de introducción", name: "intro", widget: "text" }
+              - { label: "Dirección", name: "address", widget: "string" }
+              - { label: "Teléfono (como se muestra)", name: "phone_display", widget: "string" }
+              - { label: "Teléfono (para el link, con +54)", name: "phone_link", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+
+          - label: "Pie de página"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Línea 1 (dirección y teléfono)", name: "line1", widget: "string" }
+              - { label: "Línea 2 (email y matrícula)", name: "line2", widget: "string" }
