@@ -192,13 +192,14 @@
   }
   .stats-inner{
     max-width:var(--maxw); margin:0 auto; padding:34px 28px;
-    display:grid; grid-template-columns:repeat(4,1fr);
+    display:flex; flex-wrap:wrap; justify-content:center;
   }
   .stat{
-    padding:0 24px;
+    padding:0 32px;
     border-left:1px solid var(--line);
   }
   .stat:first-child{border-left:none; padding-left:0;}
+  .stat:last-child{padding-right:0;}
   .stat b{
     font-family:var(--font-display); font-size:clamp(24px,2.8vw,30px); font-weight:800;
     color:var(--navy); display:block;
@@ -373,8 +374,8 @@
     .about-inner, .contact-inner{grid-template-columns:1fr;}
     .services-grid{grid-template-columns:repeat(2,1fr);}
     .badges-row{grid-template-columns:1fr;}
-    .stats-inner{grid-template-columns:repeat(2,1fr); gap:20px 0;}
-    .stat:nth-child(3){border-left:none;}
+    .stats-inner{gap:20px 0;}
+    .stat{border-left:none; padding:0 24px;}
   }
   @media (max-width: 720px){
     .nav-links{
@@ -497,10 +498,9 @@
             <line x1="520" y1="398" x2="520" y2="404"/>
           </g>
         </svg>
-        <div class="credential-chip">
-          <div><b data-field="hero.chip_1_value">1960</b><span data-field="hero.chip_1_label">Año de fundación</span></div>
-          <div><b data-field="hero.chip_2_value">13</b><span data-field="hero.chip_2_label">Edificios</span></div>
-          <div><b data-field="hero.chip_3_value">+1000</b><span data-field="hero.chip_3_label">Unidades func.</span></div>
+        <div class="credential-chip" id="credentialChip">
+          <div><b>1960</b><span>Año de fundación</span></div>
+          <div><b>+1000</b><span>Unidades func.</span></div>
         </div>
       </div>
     </div>
@@ -724,6 +724,14 @@
     '<path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/>'
   ];
 
+  function renderChips(list) {
+    const container = document.getElementById('credentialChip');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map(c => `
+      <div><b>${esc(c.value)}</b><span>${esc(c.label)}</span></div>
+    `).join('');
+  }
+
   function renderStats(list) {
     const container = document.querySelector('.stats-inner');
     if (!container || !Array.isArray(list) || !list.length) return;
@@ -801,6 +809,7 @@
     }
 
     // Listas de tamaño variable: se reconstruyen según la cantidad real de ítems
+    if (data.hero) renderChips(data.hero.chips);
     renderStats(data.stats);
     renderServices(data.services);
     renderBadges(data.badges);
