@@ -29,12 +29,12 @@ collections:
               - { label: "Bajada / descripción", name: "subtitle", widget: "text" }
               - { label: "Botón principal", name: "cta_primary", widget: "string" }
               - { label: "Botón secundario", name: "cta_secondary", widget: "string" }
-              - { label: "Dato 1 — valor (ej: 1960)", name: "chip_1_value", widget: "string" }
-              - { label: "Dato 1 — descripción", name: "chip_1_label", widget: "string" }
-              - { label: "Dato 2 — valor (ej: 13)", name: "chip_2_value", widget: "string" }
-              - { label: "Dato 2 — descripción", name: "chip_2_label", widget: "string" }
-              - { label: "Dato 3 — valor (ej: +1000)", name: "chip_3_value", widget: "string" }
-              - { label: "Dato 3 — descripción", name: "chip_3_label", widget: "string" }
+              - label: "Recuadro flotante de datos (arriba de la ilustración)"
+                name: "chips"
+                widget: "list"
+                fields:
+                  - { label: "Valor (ej: 1960)", name: "value", widget: "string" }
+                  - { label: "Descripción", name: "label", widget: "string" }
 
           - label: "Barra de estadísticas (4 datos)"
             name: "stats"
