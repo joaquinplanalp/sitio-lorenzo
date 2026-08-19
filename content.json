@@ -1,36 +1,71 @@
 {
-  "logo": "assets/logo-dark.png",
-  "hero": {
-    "eyebrow": "ADM. DE CONSORCIOS · MAT. RPAC N.º 2028 · MAR DEL PLATA",
-    "title_before": "Sesenta y cinco años administrando la ",
-    "title_highlight": "confianza",
-    "title_after": " de sus vecinos.",
-    "subtitle": "Desde 1960 acompañamos a los consorcios de Mar del Plata con transparencia en cada rendición de cuentas y respuestas rápidas ante cada reclamo.",
-    "cta_primary": "Solicitar información",
-    "cta_secondary": "Ver servicios",
-    "chip_1_value": "1960",
-    "chip_1_label": "Año de fundación",
-    "chip_2_value": "13",
-    "chip_2_label": "Edificios",
-    "chip_3_value": "+1000",
-    "chip_3_label": "Unidades func."
+  "contact": {
+    "heading": "Hablemos de su consorcio",
+    "intro": "Cuéntenos sobre su edificio y nos pondremos en contacto a la brevedad para conversar sobre la administración.",
+    "address": "Santa Fe 2522, Mar del Plata",
+    "phone_display": "223 492-5309",
+    "phone_link": "+542234925309",
+    "email": "admlorenzo@gmail.com"
   },
-  "stats": [
+  "services_heading": "Todo lo que un consorcio necesita, en un mismo lugar",
+  "logo": "assets/logo-dark.png",
+  "services_intro": "Gestionamos cada aspecto administrativo, legal y edilicio del consorcio para que el consejo de propietarios pueda tomar decisiones con información clara.",
+  "about": {
+    "heading": "Una administración de familia, desde 1960",
+    "paragraph_1": "Manuel José Lorenzo & Asoc. S.R.L. es una empresa marplatense dedicada a la administración de consorcios desde 1960. En más de seis décadas de trayectoria ininterrumpida nos consolidamos como un referente de confianza y solidez, sobre tres pilares: la transparencia institucional, la valorización del patrimonio edilicio y la convivencia armónica entre copropietarios.",
+    "paragraph_2": "Combinamos la experiencia de una trayectoria tradicional con herramientas modernas de gestión, para ofrecer respuestas ágiles y soluciones eficientes a las exigencias actuales de cada comunidad.",
+    "credential": "Matrícula habilitante RPAC N.º 2028 — Mar del Plata",
+    "timeline": [
+      {
+        "year": "1960",
+        "title": "Fundación de la administración",
+        "description": "Inicio de la actividad en Mar del Plata, con sede en Santa Fe 2522."
+      },
+      {
+        "year": "Hoy",
+        "title": "+1000 unidades",
+        "description": "Consorcios de distintos barrios de la ciudad confían su administración diaria."
+      },
+      {
+        "year": "Cada mes",
+        "title": "Rendición de cuentas clara",
+        "description": "Liquidaciones puntuales y balances accesibles para todo el consorcio."
+      }
+    ]
+  },
+  "badges": [
     {
-      "value": "65+",
-      "label": "Años de trayectoria"
+      "title": "Atención Personalizada",
+      "description": "Trato directo con cada consorcio"
     },
     {
-      "value": "+1000",
-      "label": "Unidades funcionales"
+      "title": "Respuesta Rápida",
+      "description": "Ante reclamos y urgencias"
     },
     {
-      "value": "RPAC 2028",
-      "label": "Matrícula habilitante"
+      "title": "Trayectoria Comercial",
+      "description": "Más de seis décadas de historia"
     }
   ],
-  "services_heading": "Todo lo que un consorcio necesita, en un mismo lugar",
-  "services_intro": "Gestionamos cada aspecto administrativo, legal y edilicio del consorcio para que el consejo de propietarios pueda tomar decisiones con información clara.",
+  "hero": {
+    "cta_secondary": "Ver servicios",
+    "title_before": "Sesenta y cinco años administrando la ",
+    "eyebrow": "ADM. DE CONSORCIOS · MAT. RPAC N.º 2028 · MAR DEL PLATA",
+    "title_highlight": "confianza",
+    "chip_1_value": "1960",
+    "chip_2_value": "13",
+    "chip_3_value": "+1000",
+    "chip_1_label": "Año de fundación",
+    "cta_primary": "Solicitar información",
+    "chip_2_label": "Edificios",
+    "title_after": " de sus vecinos.",
+    "chip_3_label": "Unidades func.",
+    "subtitle": "Desde 1960 acompañamos a los consorcios de Mar del Plata con transparencia en cada rendición de cuentas y respuestas rápidas ante cada reclamo."
+  },
+  "footer": {
+    "line1": "Santa Fe 2522, Mar del Plata · Tel. 223 492-5309",
+    "line2": "admlorenzo@gmail.com · Mat. RPAC N.º 2028"
+  },
   "services": [
     {
       "title": "Liquidación de Expensas",
@@ -57,53 +92,18 @@
       "description": "Gestión de encargados y personal de edificio: liquidación de sueldos y cargas sociales."
     }
   ],
-  "badges": [
+  "stats": [
     {
-      "title": "Atención Personalizada",
-      "description": "Trato directo con cada consorcio"
+      "value": "65+",
+      "label": "Años de trayectoria"
     },
     {
-      "title": "Respuesta Rápida",
-      "description": "Ante reclamos y urgencias"
+      "value": "+1000",
+      "label": "Unidades funcionales"
     },
     {
-      "title": "Trayectoria Comercial",
-      "description": "Más de seis décadas de historia"
+      "value": "RPAC 2028",
+      "label": "Matrícula habilitante"
     }
-  ],
-  "about": {
-    "heading": "Una administración de familia, desde 1960",
-    "paragraph_1": "Manuel José Lorenzo & Asoc. S.R.L. es una empresa marplatense dedicada a la administración de consorcios desde 1960. En más de seis décadas de trayectoria ininterrumpida nos consolidamos como un referente de confianza y solidez, sobre tres pilares: la transparencia institucional, la valorización del patrimonio edilicio y la convivencia armónica entre copropietarios.",
-    "paragraph_2": "Combinamos la experiencia de una trayectoria tradicional con herramientas modernas de gestión, para ofrecer respuestas ágiles y soluciones eficientes a las exigencias actuales de cada comunidad.",
-    "credential": "Matrícula habilitante RPAC N.º 2028 — Mar del Plata",
-    "timeline": [
-      {
-        "year": "1960",
-        "title": "Fundación de la administración",
-        "description": "Inicio de la actividad en Mar del Plata, con sede en Santa Fe 2522."
-      },
-      {
-        "year": "Hoy",
-        "title": "13 edificios, +1000 unidades",
-        "description": "Consorcios de distintos barrios de la ciudad confían su administración diaria."
-      },
-      {
-        "year": "Cada mes",
-        "title": "Rendición de cuentas clara",
-        "description": "Liquidaciones puntuales y balances accesibles para todo el consorcio."
-      }
-    ]
-  },
-  "contact": {
-    "heading": "Hablemos de su consorcio",
-    "intro": "Cuéntenos sobre su edificio y nos pondremos en contacto a la brevedad para conversar sobre la administración.",
-    "address": "Santa Fe 2522, Mar del Plata",
-    "phone_display": "223 492-5309",
-    "phone_link": "+542234925309",
-    "email": "admlorenzo@gmail.com"
-  },
-  "footer": {
-    "line1": "Santa Fe 2522, Mar del Plata · Tel. 223 492-5309",
-    "line2": "admlorenzo@gmail.com · Mat. RPAC N.º 2028"
-  }
+  ]
 }
