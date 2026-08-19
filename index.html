@@ -214,11 +214,11 @@
   /* ---------- Servicios ---------- */
   .services-grid{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
-    background:var(--line);
-    border:1px solid var(--line);
+    background:transparent;
   }
   .service-card{
     background:var(--panel);
+    border:1px solid var(--line);
     padding:32px 28px;
     transition:background .2s ease;
   }
@@ -236,9 +236,9 @@
   .badges-row{
     margin-top:0; padding-top:0;
     display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line); border-top:none;
+    background:transparent;
   }
-  .badge-item{display:flex; align-items:center; gap:14px; background:var(--paper-2); padding:22px 26px;}
+  .badge-item{display:flex; align-items:center; gap:14px; background:var(--paper-2); border:1px solid var(--line); padding:22px 26px;}
   .badge-icon{
     width:40px; height:40px; border-radius:50%; flex-shrink:0;
     border:1.5px solid var(--blue);
@@ -695,12 +695,75 @@
   // ---------------------------------------------------------------
   // CARGA DE CONTENIDO EDITABLE (content.json)
   // Este bloque lee content.json y actualiza todos los textos e
-  // imágenes marcados con data-field. Si el archivo editado desde
-  // el panel /admin tiene algún dato faltante, la página conserva
-  // el texto que ya está escrito acá abajo como respaldo.
+  // imágenes marcados con data-field. Las listas (estadísticas,
+  // servicios, sellos, línea de tiempo) se reconstruyen según la
+  // cantidad real de elementos que haya en cada lista, así que
+  // agregar o quitar ítems desde el panel funciona correctamente.
+  // Si algo falla, la página se queda con los textos por defecto.
   // ---------------------------------------------------------------
   function getPath(obj, path) {
     return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
+  }
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Sets de íconos reutilizables (si se agregan más ítems que íconos definidos, se repiten en orden)
+  const SERVICE_ICONS = [
+    '<path d="M7 3h8l4 4v14a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z"/><path d="M15 3v4h4"/><path d="M9 13h6M9 16h6M9 10h2"/>',
+    '<path d="M3 17l6-6 4 4 8-8"/><path d="M14 6h7v7"/>',
+    '<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.1-3.1a4 4 0 01-5.4 5.4L5.7 21.3a1 1 0 01-1.4-1.4L14.1 10a4 4 0 015.4-5.4l-3 3z"/>',
+    '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3L21 21"/><path d="M8 10.5h5"/>',
+    '<path d="M12 3v18M5 7l7-4 7 4M5 7v3a1 1 0 001 1h1M19 7v3a1 1 0 01-1 1h-1M4 21h16"/>',
+    '<circle cx="12" cy="8" r="3"/><path d="M5 21v-2a5 5 0 015-5h0a5 5 0 015 5v2"/><circle cx="19" cy="9" r="2"/><path d="M17 21v-1a3.5 3.5 0 013-3.46"/>'
+  ];
+  const BADGE_ICONS = [
+    '<path d="M12 2l2.9 6 6.6.6-5 4.4 1.5 6.5L12 16l-5.9 3.5L7.6 13l-5-4.4 6.6-.6L12 2z"/>',
+    '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/>',
+    '<path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-6h6v6"/>'
+  ];
+
+  function renderStats(list) {
+    const container = document.querySelector('.stats-inner');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map(s => `
+      <div class="stat reveal"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>
+    `).join('');
+  }
+
+  function renderServices(list) {
+    const container = document.querySelector('.services-grid');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map((s, i) => `
+      <div class="service-card">
+        <div class="service-icon"><svg viewBox="0 0 24 24">${SERVICE_ICONS[i % SERVICE_ICONS.length]}</svg></div>
+        <h3>${esc(s.title)}</h3>
+        <p>${esc(s.description)}</p>
+      </div>
+    `).join('');
+  }
+
+  function renderBadges(list) {
+    const container = document.querySelector('.badges-row');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map((b, i) => `
+      <div class="badge-item">
+        <div class="badge-icon"><svg viewBox="0 0 24 24">${BADGE_ICONS[i % BADGE_ICONS.length]}</svg></div>
+        <div><h4>${esc(b.title)}</h4><span>${esc(b.description)}</span></div>
+      </div>
+    `).join('');
+  }
+
+  function renderTimeline(list) {
+    const container = document.querySelector('.about-panel');
+    if (!container || !Array.isArray(list) || !list.length) return;
+    container.innerHTML = list.map(t => `
+      <div class="timeline-fact">
+        <div class="yr">${esc(t.year)}</div>
+        <div><h4>${esc(t.title)}</h4><p>${esc(t.description)}</p></div>
+      </div>
+    `).join('');
   }
 
   function hydrateContent(data) {
@@ -737,20 +800,48 @@
       }
     }
 
-    // Resto de los campos simples: [data-field="a.b.c"] o [data-field="lista.0.campo"]
+    // Listas de tamaño variable: se reconstruyen según la cantidad real de ítems
+    renderStats(data.stats);
+    renderServices(data.services);
+    renderBadges(data.badges);
+    if (data.about) renderTimeline(data.about.timeline);
+
+    // Resto de los campos simples de tamaño fijo: [data-field="a.b.c"]
     document.querySelectorAll('[data-field]').forEach(el => {
       const path = el.getAttribute('data-field');
-      // Los que ya manejamos arriba con lógica especial, los saltamos
       if (path === 'hero.title' || path === 'contact.phone_display' || path === 'contact.email') return;
+      if (path && (path.startsWith('stats.') || path.startsWith('services.') || path.startsWith('badges.') || path.startsWith('about.timeline.'))) return;
       const value = getPath(data, path);
       if (value != null && value !== '') el.textContent = value;
     });
   }
 
+  // La configuración de "aparecer al hacer scroll" se activa recién
+  // después de intentar cargar el contenido, para que también
+  // funcione en las listas reconstruidas dinámicamente.
+  function initRevealObserver() {
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(el => io.observe(el));
+      setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2000);
+    } else {
+      revealEls.forEach(el => el.classList.add('in'));
+    }
+  }
+
   fetch('content.json?v=' + Date.now())
     .then(r => r.ok ? r.json() : null)
     .then(data => { if (data) hydrateContent(data); })
-    .catch(() => { /* si falla, la página se queda con los textos por defecto */ });
+    .catch(() => { /* si falla, la página se queda con los textos por defecto */ })
+    .finally(() => { initRevealObserver(); });
 
   // Generar marcas de regla en el divisor (signature element)
   document.querySelectorAll('.ruler-divider').forEach(svg => {
@@ -780,23 +871,8 @@
     navToggle.setAttribute('aria-expanded', false);
   }));
 
-  // Reveal on scroll (sutil)
-  const revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
-    // Red de seguridad: si por algún motivo no se dispara, mostrar igual a los 2s
-    setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 2000);
-  } else {
-    revealEls.forEach(el => el.classList.add('in'));
-  }
+  // Nota: el "aparecer al hacer scroll" se activa en initRevealObserver(),
+  // llamado luego de intentar cargar content.json (ver más arriba).
 
   // Formulario de contacto
   // Formulario conectado a Formspree: los envíos llegan directo por email.
