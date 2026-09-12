@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manuel J. Lorenzo &amp; Asoc. S.R.L. | Administración de Consorcios · Mar del Plata</title>
 <meta name="description" content="Administración de consorcios en Mar del Plata desde 1960. Liquidación de expensas, rendición de cuentas, gestión de reparaciones y trámites legales.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon/android-chrome-512x512.png">
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-50FXSQX0Q7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-50FXSQX0Q7');
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800;900&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -796,10 +814,18 @@
     }
   }
 
-  fetch('content.json?v=' + Date.now())
-    .then(r => r.ok ? r.json() : null)
+  // Trae content.json directo desde GitHub (así una edición en GitHub se ve
+  // en el sitio al instante, sin depender de un nuevo deploy de Netlify).
+  // Si eso falla (sin conexión a GitHub, rama caída, etc.) usa el content.json
+  // local como respaldo.
+  const CONTENT_URL_PRIMARY = 'https://raw.githubusercontent.com/joaquinplanalp/sitio-lorenzo/main/content.json';
+  const CONTENT_URL_FALLBACK = 'content.json';
+
+  fetch(CONTENT_URL_PRIMARY + '?v=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .catch(() => fetch(CONTENT_URL_FALLBACK + '?v=' + Date.now()).then(r => r.ok ? r.json() : null))
     .then(data => { if (data) hydrateContent(data); })
-    .catch(() => { /* si falla, la página se queda con los textos por defecto */ })
+    .catch(() => { /* si fallan ambas, la página se queda con los textos por defecto */ })
     .finally(() => { initRevealObserver(); });
 
   // Generar marcas de regla en el divisor (signature element)

@@ -52,13 +52,6 @@ collections:
               - { label: "Título", name: "title", widget: "string" }
               - { label: "Descripción", name: "description", widget: "text" }
 
-          - label: "Sellos de confianza (los 3 chicos)"
-            name: "badges"
-            widget: "list"
-            fields:
-              - { label: "Título", name: "title", widget: "string" }
-              - { label: "Descripción", name: "description", widget: "string" }
-
           - label: "Nosotros"
             name: "about"
             widget: "object"
