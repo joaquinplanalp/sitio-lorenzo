@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manuel J. Lorenzo &amp; Asoc. S.R.L. | Administración de Consorcios · Mar del Plata</title>
-<meta name="description" content="Administración de consorcios en Mar del Plata desde 1960. Liquidación de expensas, rendición de cuentas, gestión de reparaciones y trámites legales.">
+<title>Administración de Consorcios y Edificios en Mar del Plata</title>
+<meta name="description" content="Administración de consorcios en Mar del Plata desde 1960. Empresa familiar con administración de edificios, expensas claras y rendición de cuentas.">
 <meta name="google-site-verification" content="ss8TZzGarsoOdJOzfEi6k1BGaIDbiil8fr5jYNXfXY0" />
 
 <!-- Favicon -->
@@ -22,6 +22,33 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-74LF5LFWD3');
+</script>
+
+<!-- Datos estructurados (schema.org) para Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://administracionlorenzo.com.ar/#negocio",
+  "name": "Manuel José Lorenzo & Asoc. S.R.L.",
+  "alternateName": "Manuel J. Lorenzo & Asoc.",
+  "description": "Administración de consorcios y administración de edificios en Mar del Plata desde 1960.",
+  "url": "https://administracionlorenzo.com.ar/",
+  "logo": "https://administracionlorenzo.com.ar/assets/logo-dark.png",
+  "image": "https://administracionlorenzo.com.ar/assets/logo-dark.png",
+  "telephone": "+542234925309",
+  "email": "admlorenzo@gmail.com",
+  "foundingDate": "1960",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Santa Fe 2522",
+    "addressLocality": "Mar del Plata",
+    "addressRegion": "Buenos Aires",
+    "addressCountry": "AR"
+  },
+  "areaServed": { "@type": "City", "name": "Mar del Plata" },
+  "sameAs": ["https://www.instagram.com/adm_lorenzo/"]
+}
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -864,6 +891,36 @@
   // Nota: el "aparecer al hacer scroll" se activa en initRevealObserver(),
   // llamado luego de intentar cargar content.json (ver más arriba).
 
+  // ---------------------------------------------------------------
+  // SEGUIMIENTO DE CONVERSIONES (Google Analytics 4)
+  // Los clics se detectan con un único listener delegado en document,
+  // así funciona también con los links tel:/mailto: que se regeneran
+  // desde content.json (hydrateContent).
+  // ---------------------------------------------------------------
+  function trackEvent(nombre, ubicacion) {
+    if (typeof gtag !== 'function') return;
+    gtag('event', nombre, { ubicacion: ubicacion, transport_type: 'beacon' });
+  }
+
+  function ubicacionDe(el) {
+    if (el.closest('header')) return 'header';
+    if (el.closest('.hero')) return 'hero';
+    if (el.closest('footer')) return 'footer';
+    const seccion = el.closest('section[id]');
+    return seccion ? seccion.id : 'otra';
+  }
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    const href = (a.getAttribute('href') || '').trim().toLowerCase();
+    let evento = null;
+    if (href.startsWith('tel:')) evento = 'click_telefono';
+    else if (href.startsWith('mailto:')) evento = 'click_email';
+    else if (a.hostname === 'wa.me' || a.hostname === 'api.whatsapp.com') evento = 'click_whatsapp';
+    if (evento) trackEvent(evento, ubicacionDe(a));
+  });
+
   // Formulario de contacto
   // Formulario conectado a Formspree: los envíos llegan directo por email.
   // Si en el futuro querés cambiar de servicio (por ej. a un webhook de Make),
@@ -887,6 +944,7 @@
           status.textContent = 'Mensaje enviado. Nos pondremos en contacto a la brevedad.';
           status.className = 'form-status ok';
           form.reset();
+          trackEvent('form_enviado', 'contacto');
         } else {
           throw new Error('Error de envío');
         }
@@ -897,6 +955,7 @@
         const body = encodeURIComponent(
           `Nombre: ${data.nombre}\nConsorcio/Edificio: ${data.consorcio || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono || '-'}\n\nMensaje:\n${data.mensaje}`
         );
+        trackEvent('form_fallback_mailto', 'contacto');
         window.location.href = `mailto:admlorenzo@gmail.com?subject=${subject}&body=${body}`;
         status.textContent = 'No pudimos enviarlo automáticamente, así que abrimos su cliente de correo con el mensaje precargado. Por favor, revíselo y envíelo desde ahí.';
         status.className = 'form-status err';
@@ -906,6 +965,7 @@
       const body = encodeURIComponent(
         `Nombre: ${data.nombre}\nConsorcio/Edificio: ${data.consorcio || '-'}\nEmail: ${data.email}\nTeléfono: ${data.telefono || '-'}\n\nMensaje:\n${data.mensaje}`
       );
+      trackEvent('form_fallback_mailto', 'contacto');
       window.location.href = `mailto:admlorenzo@gmail.com?subject=${subject}&body=${body}`;
       status.textContent = 'Se abrió su cliente de correo con el mensaje precargado.';
       status.className = 'form-status ok';
